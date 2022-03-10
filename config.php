@@ -1,8 +1,8 @@
 <?php
 
-    //Mysql
     const DBDRIVE = 'mysql';
-    const DBHOST = 'localhost';
-    const DBNAME = 'serie_login';
+    const DBHOST = '127.0.0.1';
+    const DBPORT = '3307';
+    const DBNAME = 'mosyle';
     const DBUSER = 'root';
-    const DBPASS = '';
+    const DBPASS = 'root';
