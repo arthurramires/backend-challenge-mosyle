@@ -3,52 +3,49 @@
 
     class User
     {
-        private static $table = 'user';
+        protected $id;
+        protected $name;
+        protected $email;
+        protected $password;
+        protected $drinks;
 
-        public static function select(int $id) {
-            $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
-
-            $sql = 'SELECT * FROM '.self::$table.' WHERE id = :id';
-            $stmt = $connPdo->prepare($sql);
-            $stmt->bindValue(':id', $id);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                return $stmt->fetch(\PDO::FETCH_ASSOC);
-            } else {
-                throw new \Exception("Nenhum usuário encontrado!");
-            }
+        public function getId(){
+            return $this->id;
         }
 
-        public static function selectAll() {
-            $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
-
-            $sql = 'SELECT * FROM '.self::$table;
-            $stmt = $connPdo->prepare($sql);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-            } else {
-                throw new \Exception("Nenhum usuário encontrado!");
-            }
+        public function setId(int $id){
+            $this->id = $id;
         }
 
-        public static function insert($data)
-        {
-            $connPdo = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+        public function getName(){
+            return $this->name;
+        }
 
-            $sql = 'INSERT INTO '.self::$table.' (email, password, name) VALUES (:em, :pa, :na)';
-            $stmt = $connPdo->prepare($sql);
-            $stmt->bindValue(':em', $data['email']);
-            $stmt->bindValue(':pa', $data['password']);
-            $stmt->bindValue(':na', $data['name']);
-            $stmt->execute();
+        public function setName(string $name){
+            $this->name = $name;
+        }
 
-            if ($stmt->rowCount() > 0) {
-                return 'Usuário(a) inserido com sucesso!';
-            } else {
-                throw new \Exception("Falha ao inserir usuário(a)!");
-            }
+        public function getEmail(){
+            return $this->email;
+        }
+
+        public function setEmail(string $email){
+            $this->email = $email;
+        }
+
+        public function getPassword(){
+            return $this->name;
+        }
+
+        public function setPassword(string $password){
+            $this->password = $password;
+        }
+
+        public function getDrinks(){
+            return $this->drinks;
+        }
+
+        public function setDrinks(int $drinks){
+            $this->drinks = $drinks;
         }
     }
