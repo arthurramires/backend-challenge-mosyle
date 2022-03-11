@@ -8,6 +8,15 @@
         protected $email;
         protected $password;
         protected $drinks;
+        protected $token;
+
+        public function getToken(){
+            return $this->token;
+        }
+
+        public function setToken(string $token){
+            $this->token = $token;
+        }
 
         public function getId(){
             return $this->id;
@@ -34,7 +43,7 @@
         }
 
         public function getPassword(){
-            return $this->name;
+            return $this->password;
         }
 
         public function setPassword(string $password){

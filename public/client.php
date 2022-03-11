@@ -1,6 +1,6 @@
 <?php
 
-    $url = 'http://localhost/mosyle-challenge/public_html/api';
+    $url = 'http://localhost/mosyle-challenge/public/api';
 
     $class = '/user';
     $param = '';

@@ -15,30 +15,99 @@
             $this->userRepository = new UserRepository($this->user);
         }
 
-        public function get($id = null) 
+        public function setUserData($data, $id = null)
         {
-            if ($id) {
+            if($data->name != null){
+                $this->user->setName($data->name);
+            }
+
+            if($data->drink != null){
+                $this->user->setDrinks($data->drink);
+            }
+
+            if($id != null){
                 $this->user->setId($id);
-                return $this->userRepository->select();
-            } else {
-                return $this->userRepository->selectAll();
+            }
+
+            if($data->email != null){
+                $this->user->setEmail($data->email);
+            }
+
+            if($data->password != null){
+                $this->user->setPassword($data->password);
+            }
+
+        }
+
+        public function get($id)
+        {
+            $this->user->setId($id);
+            return $this->userRepository->select();
+        }
+
+        public function getUserRankPerDay()
+        {
+            return $this->userRepository->getUserRankPerDay();
+        }
+
+        public function getUserHistory($id)
+        {
+            $this->user->setId($id);
+            return $this->userRepository->getUserDrinkHistory();
+        }
+
+        public function getAll()
+        {
+            return $this->userRepository->selectAll();
+        }
+
+        public function createUser($data)
+        {
+            try{
+                $this->setUserData($data);
+                return $this->userRepository->insert();
+            } catch (\Exception $e){
+                throw new \Exception($e->getMessage());
             }
         }
 
-        public function post() 
+        public function login($data)
         {
-            $data = $_POST;
-
-            return $this->userRepository->insert($data);
+            try{
+                $this->setUserData($data);
+                return $this->userRepository->login();
+            } catch (\Exception $e){
+                throw new \Exception($e->getMessage());
+            }
         }
 
-        public function update() 
+        public function update($data, $id)
         {
-            
+            try{
+                $this->setUserData($data, $id);
+                return $this->userRepository->update();
+            } catch (\Exception $e){
+                throw new \Exception($e->getMessage());
+            }
         }
 
-        public function delete() 
+        public function updateUserDrinks($data, $id)
         {
-            
+            try{
+                $this->setUserData($data, $id);
+                return $this->userRepository->updateUserDrinks();
+            } catch (\Exception $e){
+                throw new \Exception($e->getMessage());
+            }
+        }
+
+        public function delete($id)
+        {
+            try{
+                $this->user->setId($id);
+                return $this->userRepository->delete();
+            } catch (\Exception $e){
+                throw new \Exception($e->getMessage());
+            }
         }
     }
